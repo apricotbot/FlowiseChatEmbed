@@ -2,6 +2,7 @@ import { ShortTextInput } from './ShortTextInput';
 import { isMobile } from '@/utils/isMobileSignal';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { SendButton } from '@/components/SendButton';
+import { ProgressCircle } from './Upload';
 
 type Props = {
   placeholder?: string;
@@ -78,6 +79,7 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
+      <ProgressCircle />
     </div>
   );
 };
