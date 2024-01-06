@@ -3,11 +3,7 @@ import { isMobile } from '@/utils/isMobileSignal';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { SendButton } from '@/components/SendButton';
 import { Upload } from './Upload';
-<<<<<<< HEAD
-import { PeleAIConfig } from '@/features/bubble/types';
-=======
-import { ApricotBotConfig } from '@/features/bubble/types';
->>>>>>> af22e4e (get upload files config)
+import { ApricotBotConfig, PeleAIConfig } from '@/features/bubble/types';
 
 type Props = {
   placeholder?: string;
@@ -18,13 +14,10 @@ type Props = {
   fontSize?: number;
   disabled?: boolean;
   onSubmit: (value: string) => void;
-<<<<<<< HEAD
   onUpload: (isSuccess: boolean, message: string) => void;
   peleAIConfig?: PeleAIConfig;
   chatId?: string;
-=======
   apricotBotConfig?: ApricotBotConfig
->>>>>>> af22e4e (get upload files config)
 };
 
 const defaultBackgroundColor = '#ffffff';
@@ -92,22 +85,12 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 3ac3312 (commit dist)
       <Upload
         uploadColor={props.sendButtonColor ?? defaultButtonColor}
         chatId={props.chatId}
         customerId={props.peleAIConfig?.customerId}
         onUpload={props.onUpload}
       />
-<<<<<<< HEAD
-=======
-      <Upload customerId={props.apricotBotConfig?.customerId}/>
->>>>>>> af22e4e (get upload files config)
-=======
->>>>>>> 3ac3312 (commit dist)
     </div>
   );
 };

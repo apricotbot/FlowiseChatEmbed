@@ -7,11 +7,7 @@ import { BotBubble } from './bubbles/BotBubble';
 import { LoadingBubble } from './bubbles/LoadingBubble';
 import { SourceBubble } from './bubbles/SourceBubble';
 import { StarterPromptBubble } from './bubbles/StarterPromptBubble';
-<<<<<<< HEAD
-import { BotMessageTheme, TextInputTheme, UserMessageTheme, PeleAIConfig } from '@/features/bubble/types';
-=======
 import { BotMessageTheme, TextInputTheme, UserMessageTheme, ApricotBotConfig } from '@/features/bubble/types';
->>>>>>> af22e4e (get upload files config)
 import { Badge } from './Badge';
 import socketIOClient from 'socket.io-client';
 import { Popup } from '@/features/popup';
@@ -44,11 +40,7 @@ export type BotProps = {
   titleAvatarSrc?: string;
   fontSize?: number;
   isFullPage?: boolean;
-<<<<<<< HEAD
-  peleAIConfig?: PeleAIConfig;
-=======
   apricotBotConfig?: ApricotBotConfig;
->>>>>>> af22e4e (get upload files config)
 };
 
 const defaultWelcomeMessage = 'Hi there! How can I help?';
@@ -523,13 +515,10 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
             disabled={loading()}
             defaultValue={userInput()}
             onSubmit={handleSubmit}
-<<<<<<< HEAD
             onUpload={handleUpload}
             peleAIConfig={props.peleAIConfig}
             chatId={chatId()}
-=======
             apricotBotConfig={props.apricotBotConfig}
->>>>>>> af22e4e (get upload files config)
           />
         </div>
         <Show when={messages().length === 1}>

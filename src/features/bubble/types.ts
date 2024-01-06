@@ -52,12 +52,10 @@ export type ButtonTheme = {
   right?: number;
 };
 
-<<<<<<< HEAD
-export type PeleAIConfig = {
-  customerId?: string;
-};
-=======
 export type ApricotBotConfig = {
   customerId?: string
 }
->>>>>>> af22e4e (get upload files config)
+
+export type PeleAIConfig = {
+  customerId?: string;
+};

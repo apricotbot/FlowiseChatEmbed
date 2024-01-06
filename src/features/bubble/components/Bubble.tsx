@@ -66,11 +66,7 @@ export const Bubble = (props: BubbleProps) => {
             chatflowid={props.chatflowid}
             chatflowConfig={props.chatflowConfig}
             apiHost={props.apiHost}
-<<<<<<< HEAD
-            peleAIConfig={props.peleAIConfig}
-=======
             apricotBotConfig={props.apricotBotConfig}
->>>>>>> af22e4e (get upload files config)
           />
         </Show>
       </div>
