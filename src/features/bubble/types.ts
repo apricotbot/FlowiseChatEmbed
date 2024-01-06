@@ -52,5 +52,5 @@ export type ButtonTheme = {
 };
 
 export type ApricotBotConfig = {
-  customerId?: string
-}
+  customerId?: string;
+};

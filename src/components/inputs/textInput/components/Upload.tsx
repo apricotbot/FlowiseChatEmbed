@@ -1,11 +1,10 @@
 import { createSignal, onMount, Show } from 'solid-js';
 
 type UploadProps = {
-  customerId?: string
-}
+  customerId?: string;
+};
 
 export const Upload = (props: UploadProps) => {
-
   const [isEnabled, setIsEnabled] = createSignal(false);
   const [isUploading, setIsUploading] = createSignal(false);
 
