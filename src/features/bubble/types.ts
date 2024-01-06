@@ -50,3 +50,7 @@ export type ButtonTheme = {
   bottom?: number;
   right?: number;
 };
+
+export type ApricotBotConfig = {
+  customerId?: string
+}

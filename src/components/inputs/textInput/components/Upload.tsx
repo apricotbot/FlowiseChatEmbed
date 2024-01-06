@@ -1,7 +1,13 @@
-import { createSignal } from 'solid-js';
+import { createSignal, onMount, Show } from 'solid-js';
 
-export const ProgressCircle = () => {
-  const [isUploading, setIsUploading] = createSignal(true);
+type UploadProps = {
+  customerId?: string
+}
+
+export const Upload = (props: UploadProps) => {
+
+  const [isEnabled, setIsEnabled] = createSignal(false);
+  const [isUploading, setIsUploading] = createSignal(false);
 
   const divideFileInChunks = (fileData: any) => {
     const fileChunks = [];
@@ -10,14 +16,14 @@ export const ProgressCircle = () => {
     while (offset < fileData.size) {
       const chunkSize = Math.min(maxBlob, fileData.size - offset);
       fileChunks.push({
-        blob: fileData.slice(offset, (offset + chunkSize)),
+        blob: fileData.slice(offset, offset + chunkSize),
         start: offset,
         end: offset + chunkSize,
-      })
+      });
       offset += chunkSize;
     }
     return fileChunks;
-  }
+  };
 
   const uploadFiles = (fileData: any) => {
     setIsUploading(true);
@@ -25,7 +31,7 @@ export const ProgressCircle = () => {
       name: fileData.name,
       mimeType: fileData.type,
       parents: ['1__Tly9KYITPHtsEoAf7d0a1wVcJoly8g'],
-      fields: 'id'
+      fields: 'id',
     };
     const fileChunks: any = divideFileInChunks(fileData); // divide the file into chunks
     const options = {
@@ -37,30 +43,35 @@ export const ProgressCircle = () => {
         meta,
         contentLength: fileData.size,
       }),
-    }
-    fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options).then(async (res) => {
-      const session_response = await res.json();
-      const sessionId = session_response.sessionId;
-      for (let i = 0; i < fileChunks.length; i += 1) {
-        const formData = new FormData();
-        formData.append('blob', fileChunks[i].blob, 'blobChunk');
-        formData.append('start', fileChunks[i].start);
-        formData.append('end', fileChunks[i].end);
-        formData.append('contentLength', fileData.size);
-        formData.append('sessionId', sessionId);
-        await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
-          method: 'POST',
-          body: formData
-        });
-        updateProgressBar(((i + 1) / fileChunks.length) * 100);
-      }
-      return Promise.resolve('File Uploaded Successfully');
-    }).then(result => {
-      setTimeout(() => { setIsUploading(false) }, 500);
-    }).catch(err => {
-      console.log(err);
-    });
-  }
+    };
+    fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
+      .then(async (res) => {
+        const session_response = await res.json();
+        const sessionId = session_response.sessionId;
+        for (let i = 0; i < fileChunks.length; i += 1) {
+          const formData = new FormData();
+          formData.append('blob', fileChunks[i].blob, 'blobChunk');
+          formData.append('start', fileChunks[i].start);
+          formData.append('end', fileChunks[i].end);
+          formData.append('contentLength', fileData.size);
+          formData.append('sessionId', sessionId);
+          await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
+            method: 'POST',
+            body: formData,
+          });
+          updateProgressBar(((i + 1) / fileChunks.length) * 100);
+        }
+        return Promise.resolve('File Uploaded Successfully');
+      })
+      .then((result) => {
+        setTimeout(() => {
+          setIsUploading(false);
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // document.addEventListener('click', doSomething, false);
 
@@ -78,7 +89,7 @@ export const ProgressCircle = () => {
         progressCircle.setAttribute('stroke-dashoffset', '' + offset);
       }
     }
-  }
+  };
 
   const getProgressBar = () => {
     return (
@@ -88,7 +99,7 @@ export const ProgressCircle = () => {
         viewBox="-14.125 -14.125 141.25 141.25"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ transform: 'rotate(-90deg)', "margin-bottom":"10" }}
+        style={{ transform: 'rotate(-90deg)', 'margin-bottom': '10' }}
       >
         <circle
           r="46.5"
@@ -114,7 +125,7 @@ export const ProgressCircle = () => {
         />
       </svg>
     );
-  }
+  };
 
   const onUploadClick = (e: any) => {
     const chatbot = document.querySelector('flowise-chatbot');
@@ -131,24 +142,49 @@ export const ProgressCircle = () => {
       }
     }
     e.stopPropagation();
-  }
+  };
 
   const getUpload = () => {
     return (
       <div onClick={onUploadClick} style={{ cursor: 'pointer' }}>
-        <svg width="64px" height="64px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" style="width: 30px;height: 50px;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M19.002 21V15M21.0303 17L19.0303 15L17.0303 17M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H15M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V11" stroke="#000000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+        <svg
+          width="64px"
+          height="64px"
+          viewBox="0 0 24.00 24.00"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          stroke="#000000"
+          style={{ width: '30px', height: '50px' }}
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0" />
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+          <g id="SVGRepo_iconCarrier">
+            {' '}
+            <path
+              d="M19.002 21V15M21.0303 17L19.0303 15L17.0303 17M13 3H8.2C7.0799 3 6.51984 3 6.09202 3.21799C5.71569 3.40973 5.40973 3.71569 5.21799 4.09202C5 4.51984 5 5.0799 5 6.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.0799 21 8.2 21H15M13 3L19 9M13 3V7.4C13 7.96005 13 8.24008 13.109 8.45399C13.2049 8.64215 13.3578 8.79513 13.546 8.89101C13.7599 9 14.0399 9 14.6 9H19M19 9V11"
+              stroke="#000000"
+              stroke-width="1.2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />{' '}
+          </g>
+        </svg>
       </div>
     );
-  }
+  };
+
+  onMount(async () => {
+    const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
+    const config = await response.json();
+    setIsEnabled(config.enabled);
+  });
 
   return (
-    <div>
-      <input type="file" id="file_button" style="display:none"></input>
-      {isUploading() ? (getProgressBar()) : (getUpload())}
-    </div>
-  )
-
-
+    <Show when={isEnabled}>
+      <div>
+        <input type="file" id="file_button" style={{ display: 'none' }} />
+        {isUploading() ? getProgressBar() : getUpload()}
+      </div>
+    </Show>
+  );
 };
-
-//{isUploading() ? (getProgressBar()) : (getUpload())}

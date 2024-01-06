@@ -2,7 +2,8 @@ import { ShortTextInput } from './ShortTextInput';
 import { isMobile } from '@/utils/isMobileSignal';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { SendButton } from '@/components/SendButton';
-import { ProgressCircle } from './Upload';
+import { Upload } from './Upload';
+import { ApricotBotConfig } from '@/features/bubble/types';
 
 type Props = {
   placeholder?: string;
@@ -13,6 +14,7 @@ type Props = {
   fontSize?: number;
   disabled?: boolean;
   onSubmit: (value: string) => void;
+  apricotBotConfig?: ApricotBotConfig
 };
 
 const defaultBackgroundColor = '#ffffff';
@@ -79,7 +81,7 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
-      <ProgressCircle />
+      <Upload customerId={props.apricotBotConfig?.customerId}/>
     </div>
   );
 };
