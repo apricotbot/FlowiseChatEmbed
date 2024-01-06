@@ -1,6 +1,7 @@
 import { createSignal, onMount, Show } from 'solid-js';
 
 type UploadProps = {
+<<<<<<< HEAD
   chatId?: string;
   customerId?: string;
   uploadColor?: string;
@@ -10,6 +11,14 @@ type UploadProps = {
 export const Upload = (props: UploadProps) => {
   const [isEnabled, setIsEnabled] = createSignal(false);
   const [folderId, setFolderId] = createSignal(undefined);
+=======
+  customerId?: string
+}
+
+export const Upload = (props: UploadProps) => {
+
+  const [isEnabled, setIsEnabled] = createSignal(false);
+>>>>>>> af22e4e (get upload files config)
   const [isUploading, setIsUploading] = createSignal(false);
 
   const divideFileInChunks = (fileData: any) => {
@@ -40,8 +49,12 @@ export const Upload = (props: UploadProps) => {
     const meta = {
       name: fileData.name,
       mimeType: fileData.type,
+<<<<<<< HEAD
       parents: [folderId()],
       appProperties: { chatId: props.chatId },
+=======
+      parents: ['1__Tly9KYITPHtsEoAf7d0a1wVcJoly8g'],
+>>>>>>> af22e4e (get upload files config)
       fields: 'id',
     };
     const fileChunks: any = divideFileInChunks(fileData); // divide the file into chunks
@@ -56,11 +69,15 @@ export const Upload = (props: UploadProps) => {
       }),
     };
     fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
+<<<<<<< HEAD
       // fetch('http://localhost:5001/session', options)
       .then(async (res) => {
         if (!res.ok) {
           throw new Error();
         }
+=======
+      .then(async (res) => {
+>>>>>>> af22e4e (get upload files config)
         const session_response = await res.json();
         const sessionId = session_response.sessionId;
         for (let i = 0; i < fileChunks.length; i += 1) {
@@ -70,8 +87,28 @@ export const Upload = (props: UploadProps) => {
           formData.append('end', fileChunks[i].end);
           formData.append('contentLength', fileData.size);
           formData.append('sessionId', sessionId);
+<<<<<<< HEAD
           formData.append('customerId', props.customerId ? props.customerId : '');
           formData.append('chatId', props.chatId ? props.chatId : '');
+=======
+          await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
+            method: 'POST',
+            body: formData,
+          });
+          updateProgressBar(((i + 1) / fileChunks.length) * 100);
+        }
+        return Promise.resolve('File Uploaded Successfully');
+      })
+      .then((result) => {
+        setTimeout(() => {
+          setIsUploading(false);
+        }, 500);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+>>>>>>> af22e4e (get upload files config)
 
           await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
             // await fetch('http://localhost:5001/upload', {
@@ -179,6 +216,7 @@ export const Upload = (props: UploadProps) => {
     );
   };
 
+<<<<<<< HEAD
   const getInputFileButton: any = () => {
     const chatbot = document.querySelector('flowise-chatbot');
     if (!!chatbot && !!chatbot.shadowRoot) {
@@ -215,8 +253,24 @@ export const Upload = (props: UploadProps) => {
     <Show when={isEnabled()}>
       <div>
         <input type="file" id="file_button" style={{ display: 'none' }} accept="image/*,video/*,.doc,.docx,.pdf" />
+=======
+  onMount(async () => {
+    const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
+    const config = await response.json();
+    setIsEnabled(config.enabled);
+  });
+
+  return (
+    <Show when={isEnabled}>
+      <div>
+        <input type="file" id="file_button" style={{ display: 'none' }} />
+>>>>>>> af22e4e (get upload files config)
         {isUploading() ? getProgressBar() : getUpload()}
       </div>
     </Show>
   );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> af22e4e (get upload files config)
