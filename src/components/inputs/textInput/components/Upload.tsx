@@ -173,13 +173,17 @@ export const Upload = (props: UploadProps) => {
   };
 
   onMount(async () => {
-    const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
-    const config = await response.json();
-    setIsEnabled(config.enabled);
+    try {
+      const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
+      const config = await response.json();
+      setIsEnabled(config.enabled);
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   return (
-    <Show when={isEnabled}>
+    <Show when={isEnabled()}>
       <div>
         <input type="file" id="file_button" style={{ display: 'none' }} />
         {isUploading() ? getProgressBar() : getUpload()}
