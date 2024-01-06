@@ -6,6 +6,7 @@ type UploadProps = {
 
 export const Upload = (props: UploadProps) => {
   const [isEnabled, setIsEnabled] = createSignal(false);
+  const [folderId, setFolderId] = createSignal(undefined);
   const [isUploading, setIsUploading] = createSignal(false);
 
   const divideFileInChunks = (fileData: any) => {
@@ -29,7 +30,7 @@ export const Upload = (props: UploadProps) => {
     const meta = {
       name: fileData.name,
       mimeType: fileData.type,
-      parents: ['1__Tly9KYITPHtsEoAf7d0a1wVcJoly8g'],
+      parents: [folderId()],
       fields: 'id',
     };
     const fileChunks: any = divideFileInChunks(fileData); // divide the file into chunks
@@ -176,7 +177,8 @@ export const Upload = (props: UploadProps) => {
     try {
       const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
       const config = await response.json();
-      setIsEnabled(config.enabled);
+      setIsEnabled(config.isEnabled);
+      setFolderId(config.folderId);
     } catch (err) {
       console.log(err);
     }
