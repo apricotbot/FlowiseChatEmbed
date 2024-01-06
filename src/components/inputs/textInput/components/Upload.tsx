@@ -2,6 +2,7 @@ import { createSignal, onMount, Show } from 'solid-js';
 
 type UploadProps = {
   customerId?: string;
+  onUpload: (isSuccess: boolean) => void;
 };
 
 export const Upload = (props: UploadProps) => {
@@ -63,17 +64,17 @@ export const Upload = (props: UploadProps) => {
         }
         return Promise.resolve('File Uploaded Successfully');
       })
-      .then((result) => {
+      .then(() => {
         setTimeout(() => {
           setIsUploading(false);
+          props.onUpload(true);
         }, 500);
       })
       .catch((err) => {
-        console.log(err);
+        setIsUploading(false);
+        props.onUpload(false);
       });
   };
-
-  // document.addEventListener('click', doSomething, false);
 
   const updateProgressBar = (percentage: number) => {
     const chatbot = document.querySelector('flowise-chatbot');

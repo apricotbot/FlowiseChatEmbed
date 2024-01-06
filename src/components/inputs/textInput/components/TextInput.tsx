@@ -14,6 +14,7 @@ type Props = {
   fontSize?: number;
   disabled?: boolean;
   onSubmit: (value: string) => void;
+  onUpload: (isSuccess: boolean) => void;
   apricotBotConfig?: ApricotBotConfig;
 };
 
@@ -81,7 +82,7 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
-      <Upload customerId={props.apricotBotConfig?.customerId} />
+      <Upload customerId={props.apricotBotConfig?.customerId} onUpload={props.onUpload} />
     </div>
   );
 };

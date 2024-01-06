@@ -274,6 +274,15 @@ export const Bot = (props: BotProps & { class?: string }) => {
     }
   };
 
+  const handleUpload = (isSuccess: boolean) => {
+    console.log('handleUpload', isSuccess);
+    if (isSuccess) {
+      setMessages((prevMessages) => [...prevMessages, { message: 'Thank you for sharing this file', type: 'apiMessage' }]);
+    } else {
+      setMessages((prevMessages) => [...prevMessages, { message: 'Error occurred while uploading file, please retry..', type: 'apiMessage' }]);
+    }
+  }
+
   const clearChat = () => {
     try {
       localStorage.removeItem(`${props.chatflowid}_EXTERNAL`);
@@ -506,6 +515,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             disabled={loading()}
             defaultValue={userInput()}
             onSubmit={handleSubmit}
+            onUpload={handleUpload}
             apricotBotConfig={props.apricotBotConfig}
           />
         </div>
