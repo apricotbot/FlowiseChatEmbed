@@ -275,13 +275,12 @@ export const Bot = (props: BotProps & { class?: string }) => {
   };
 
   const handleUpload = (isSuccess: boolean) => {
-    console.log('handleUpload', isSuccess);
     if (isSuccess) {
       setMessages((prevMessages) => [...prevMessages, { message: 'Thank you for sharing this file', type: 'apiMessage' }]);
     } else {
       setMessages((prevMessages) => [...prevMessages, { message: 'Error occurred while uploading file, please retry..', type: 'apiMessage' }]);
     }
-  }
+  };
 
   const clearChat = () => {
     try {
@@ -517,6 +516,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             onSubmit={handleSubmit}
             onUpload={handleUpload}
             apricotBotConfig={props.apricotBotConfig}
+            chatId={chatId()}
           />
         </div>
         <Show when={messages().length === 1}>

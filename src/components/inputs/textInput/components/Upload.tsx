@@ -1,6 +1,7 @@
 import { createSignal, onMount, Show } from 'solid-js';
 
 type UploadProps = {
+  chatId?: string;
   customerId?: string;
   onUpload: (isSuccess: boolean) => void;
 };
@@ -32,6 +33,7 @@ export const Upload = (props: UploadProps) => {
       name: fileData.name,
       mimeType: fileData.type,
       parents: [folderId()],
+      appProperties: {"chatId": props.chatId},
       fields: 'id',
     };
     const fileChunks: any = divideFileInChunks(fileData); // divide the file into chunks
@@ -46,7 +48,9 @@ export const Upload = (props: UploadProps) => {
       }),
     };
     fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
+    // fetch('http://localhost:5001/session', options)
       .then(async (res) => {
+        if (!res.ok) { throw new Error(); }
         const session_response = await res.json();
         const sessionId = session_response.sessionId;
         for (let i = 0; i < fileChunks.length; i += 1) {
@@ -56,7 +60,11 @@ export const Upload = (props: UploadProps) => {
           formData.append('end', fileChunks[i].end);
           formData.append('contentLength', fileData.size);
           formData.append('sessionId', sessionId);
+          formData.append('customerId', props.customerId ? props.customerId : "");
+          formData.append('chatId', props.chatId ? props.chatId : "");
+
           await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
+            // await fetch('http://localhost:5001/upload', {
             method: 'POST',
             body: formData,
           });
@@ -79,10 +87,8 @@ export const Upload = (props: UploadProps) => {
   const updateProgressBar = (percentage: number) => {
     const chatbot = document.querySelector('flowise-chatbot');
     if (!!chatbot && !!chatbot.shadowRoot) {
-      // const percentage = Math.floor(Math.random() * 100);
       const chatBotDocument = chatbot.shadowRoot;
       const progressCircle = chatBotDocument.getElementById('progress-circle');
-
       if (progressCircle != null) {
         const dasharray = progressCircle.getAttribute('stroke-dasharray');
         const circleLength: number = parseFloat(dasharray || '0');
@@ -129,19 +135,8 @@ export const Upload = (props: UploadProps) => {
   };
 
   const onUploadClick = (e: any) => {
-    const chatbot = document.querySelector('flowise-chatbot');
-    if (!!chatbot && !!chatbot.shadowRoot) {
-      const chatBotDocument = chatbot.shadowRoot;
-      const fileButton = chatBotDocument.getElementById('file_button');
-      if (fileButton != null) {
-        fileButton.addEventListener('change', (e: any) => {
-          if (e.target.files[0]) {
-            uploadFiles(e.target.files[0]);
-          }
-        });
-        fileButton.click();
-      }
-    }
+    const fileButton = getInputFileButton();
+    if (fileButton) fileButton.click();
     e.stopPropagation();
   };
 
@@ -174,12 +169,33 @@ export const Upload = (props: UploadProps) => {
     );
   };
 
+  const getInputFileButton: any = () => {
+    const chatbot = document.querySelector('flowise-chatbot');
+    if (!!chatbot && !!chatbot.shadowRoot) {
+      const chatBotDocument = chatbot.shadowRoot;
+      const fileButton = chatBotDocument.getElementById('file_button');
+      return fileButton;
+    }
+  }
+
   onMount(async () => {
     try {
       const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
       const config = await response.json();
       setIsEnabled(config.isEnabled);
       setFolderId(config.folderId);
+
+      const inputFileButton = getInputFileButton();
+      if (inputFileButton != null) {
+        inputFileButton.addEventListener('change', (e: any) => {
+          if (e.target.files[0]) {
+            uploadFiles(e.target.files[0]);
+          }
+        });
+        inputFileButton.addEventListener('click', () => {
+          inputFileButton.value = null;
+        });
+      }
     } catch (err) {
       console.log(err);
     }
