@@ -14,7 +14,7 @@ type Props = {
   fontSize?: number;
   disabled?: boolean;
   onSubmit: (value: string) => void;
-  onUpload: (isSuccess: boolean) => void;
+  onUpload: (isSuccess: boolean, message: string) => void;
   peleAIConfig?: PeleAIConfig;
   chatId?: string;
 };

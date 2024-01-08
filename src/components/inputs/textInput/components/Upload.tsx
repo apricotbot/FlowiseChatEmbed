@@ -3,7 +3,7 @@ import { createSignal, onMount, Show } from 'solid-js';
 type UploadProps = {
   chatId?: string;
   customerId?: string;
-  onUpload: (isSuccess: boolean) => void;
+  onUpload: (isSuccess: boolean, message: string) => void;
 };
 
 export const Upload = (props: UploadProps) => {
@@ -28,12 +28,18 @@ export const Upload = (props: UploadProps) => {
   };
 
   const uploadFiles = (fileData: any) => {
+    if (fileData && fileData.size) {
+      const gb = fileData.size / (1024 ** 3);
+      if (gb > 2) {
+        props.onUpload(false, 'Please do not upload a file larger than 2 GB');
+      }
+    }
     setIsUploading(true);
     const meta = {
       name: fileData.name,
       mimeType: fileData.type,
       parents: [folderId()],
-      appProperties: {"chatId": props.chatId},
+      appProperties: { chatId: props.chatId },
       fields: 'id',
     };
     const fileChunks: any = divideFileInChunks(fileData); // divide the file into chunks
@@ -47,10 +53,12 @@ export const Upload = (props: UploadProps) => {
         contentLength: fileData.size,
       }),
     };
-    // fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
-    fetch('http://localhost:5001/session', options)
+    fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
+    // fetch('http://localhost:5001/session', options)
       .then(async (res) => {
-        if (!res.ok) { throw new Error(); }
+        if (!res.ok) {
+          throw new Error();
+        }
         const session_response = await res.json();
         const sessionId = session_response.sessionId;
         for (let i = 0; i < fileChunks.length; i += 1) {
@@ -60,11 +68,11 @@ export const Upload = (props: UploadProps) => {
           formData.append('end', fileChunks[i].end);
           formData.append('contentLength', fileData.size);
           formData.append('sessionId', sessionId);
-          formData.append('customerId', props.customerId ? props.customerId : "");
-          formData.append('chatId', props.chatId ? props.chatId : "");
+          formData.append('customerId', props.customerId ? props.customerId : '');
+          formData.append('chatId', props.chatId ? props.chatId : '');
 
-          // await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
-            await fetch('http://localhost:5001/upload', {
+          await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
+          // await fetch('http://localhost:5001/upload', {
             method: 'POST',
             body: formData,
           });
@@ -75,12 +83,12 @@ export const Upload = (props: UploadProps) => {
       .then(() => {
         setTimeout(() => {
           setIsUploading(false);
-          props.onUpload(true);
+          props.onUpload(true, 'Thank you for sharing this file');
         }, 500);
       })
       .catch((err) => {
         setIsUploading(false);
-        props.onUpload(false);
+        props.onUpload(false, 'Error occurred while uploading file, please retry..');
       });
   };
 

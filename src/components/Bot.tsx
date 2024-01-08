@@ -274,12 +274,8 @@ export const Bot = (props: BotProps & { class?: string }) => {
     }
   };
 
-  const handleUpload = (isSuccess: boolean) => {
-    if (isSuccess) {
-      setMessages((prevMessages) => [...prevMessages, { message: 'Thank you for sharing this file', type: 'apiMessage' }]);
-    } else {
-      setMessages((prevMessages) => [...prevMessages, { message: 'Error occurred while uploading file, please retry..', type: 'apiMessage' }]);
-    }
+  const handleUpload = (isSuccess: boolean, message: string) => {
+    setMessages((prevMessages) => [...prevMessages, { message, type: 'apiMessage' }]);
   };
 
   const clearChat = () => {
