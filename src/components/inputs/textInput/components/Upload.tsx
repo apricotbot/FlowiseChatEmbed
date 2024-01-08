@@ -47,8 +47,8 @@ export const Upload = (props: UploadProps) => {
         contentLength: fileData.size,
       }),
     };
-    fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
-    // fetch('http://localhost:5001/session', options)
+    // fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
+    fetch('http://localhost:5001/session', options)
       .then(async (res) => {
         if (!res.ok) { throw new Error(); }
         const session_response = await res.json();
@@ -63,8 +63,8 @@ export const Upload = (props: UploadProps) => {
           formData.append('customerId', props.customerId ? props.customerId : "");
           formData.append('chatId', props.chatId ? props.chatId : "");
 
-          await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
-            // await fetch('http://localhost:5001/upload', {
+          // await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
+            await fetch('http://localhost:5001/upload', {
             method: 'POST',
             body: formData,
           });
@@ -204,7 +204,7 @@ export const Upload = (props: UploadProps) => {
   return (
     <Show when={isEnabled()}>
       <div>
-        <input type="file" id="file_button" style={{ display: 'none' }} />
+        <input type="file" id="file_button" style={{ display: 'none' }} accept="image/*,video/*,.doc,.docx,.pdf"/>
         {isUploading() ? getProgressBar() : getUpload()}
       </div>
     </Show>

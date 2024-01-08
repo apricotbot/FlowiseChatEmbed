@@ -3,7 +3,7 @@ import { isMobile } from '@/utils/isMobileSignal';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { SendButton } from '@/components/SendButton';
 import { Upload } from './Upload';
-import { ApricotBotConfig } from '@/features/bubble/types';
+import { PeleAIConfig } from '@/features/bubble/types';
 
 type Props = {
   placeholder?: string;
@@ -15,7 +15,7 @@ type Props = {
   disabled?: boolean;
   onSubmit: (value: string) => void;
   onUpload: (isSuccess: boolean) => void;
-  apricotBotConfig?: ApricotBotConfig;
+  peleAIConfig?: PeleAIConfig;
   chatId?: string;
 };
 
@@ -83,7 +83,7 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
-      <Upload chatId={props.chatId} customerId={props.apricotBotConfig?.customerId} onUpload={props.onUpload} />
+      <Upload chatId={props.chatId} customerId={props.peleAIConfig?.customerId} onUpload={props.onUpload} />
     </div>
   );
 };

@@ -51,6 +51,6 @@ export type ButtonTheme = {
   right?: number;
 };
 
-export type ApricotBotConfig = {
+export type PeleAIConfig = {
   customerId?: string;
 };

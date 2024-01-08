@@ -5,5 +5,5 @@ export const defaultBotProps: BubbleProps = {
   apiHost: undefined,
   chatflowConfig: undefined,
   theme: undefined,
-  apricotBotConfig: undefined,
+  peleAIConfig: undefined,
 };

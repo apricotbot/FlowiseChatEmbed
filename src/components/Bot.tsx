@@ -7,7 +7,7 @@ import { BotBubble } from './bubbles/BotBubble';
 import { LoadingBubble } from './bubbles/LoadingBubble';
 import { SourceBubble } from './bubbles/SourceBubble';
 import { StarterPromptBubble } from './bubbles/StarterPromptBubble';
-import { BotMessageTheme, TextInputTheme, UserMessageTheme, ApricotBotConfig } from '@/features/bubble/types';
+import { BotMessageTheme, TextInputTheme, UserMessageTheme, PeleAIConfig } from '@/features/bubble/types';
 import { Badge } from './Badge';
 import socketIOClient from 'socket.io-client';
 import { Popup } from '@/features/popup';
@@ -39,7 +39,7 @@ export type BotProps = {
   titleAvatarSrc?: string;
   fontSize?: number;
   isFullPage?: boolean;
-  apricotBotConfig?: ApricotBotConfig;
+  peleAIConfig?: PeleAIConfig;
 };
 
 const defaultWelcomeMessage = 'Hi there! How can I help?';
@@ -515,7 +515,7 @@ export const Bot = (props: BotProps & { class?: string }) => {
             defaultValue={userInput()}
             onSubmit={handleSubmit}
             onUpload={handleUpload}
-            apricotBotConfig={props.apricotBotConfig}
+            peleAIConfig={props.peleAIConfig}
             chatId={chatId()}
           />
         </div>
