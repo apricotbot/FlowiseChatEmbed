@@ -44,4 +44,7 @@ export type ButtonTheme = {
     bottom?: number;
     right?: number;
 };
+export type PeleAIConfig = {
+    customerId?: string;
+};
 //# sourceMappingURL=types.d.ts.map

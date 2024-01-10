@@ -32,6 +32,7 @@ export const Upload = (props: UploadProps) => {
       const gb = fileData.size / (1024 ** 3);
       if (gb > 2) {
         props.onUpload(false, 'Please do not upload a file larger than 2 GB');
+        return;
       }
     }
     setIsUploading(true);
@@ -54,7 +55,7 @@ export const Upload = (props: UploadProps) => {
       }),
     };
     fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
-    // fetch('http://localhost:5001/session', options)
+      // fetch('http://localhost:5001/session', options)
       .then(async (res) => {
         if (!res.ok) {
           throw new Error();
@@ -72,7 +73,7 @@ export const Upload = (props: UploadProps) => {
           formData.append('chatId', props.chatId ? props.chatId : '');
 
           await fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/upload', {
-          // await fetch('http://localhost:5001/upload', {
+            // await fetch('http://localhost:5001/upload', {
             method: 'POST',
             body: formData,
           });
@@ -184,7 +185,7 @@ export const Upload = (props: UploadProps) => {
       const fileButton = chatBotDocument.getElementById('file_button');
       return fileButton;
     }
-  }
+  };
 
   onMount(async () => {
     try {
@@ -212,7 +213,7 @@ export const Upload = (props: UploadProps) => {
   return (
     <Show when={isEnabled()}>
       <div>
-        <input type="file" id="file_button" style={{ display: 'none' }} accept="image/*,video/*,.doc,.docx,.pdf"/>
+        <input type="file" id="file_button" style={{ display: 'none' }} accept="image/*,video/*,.doc,.docx,.pdf" />
         {isUploading() ? getProgressBar() : getUpload()}
       </div>
     </Show>
