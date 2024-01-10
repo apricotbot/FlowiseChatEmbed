@@ -70,6 +70,7 @@ export const Bubble = (props: BubbleProps) => {
             isRTL={bubbleProps.theme?.chatWindow?.isRTL}
             uploadSuccessMessage={bubbleProps.theme?.upload?.successMessage}
             uploadFailureMessage={bubbleProps.theme?.upload?.failureMessage}
+            observersConfig={props.observersConfig}
           />
         </Show>
       </div>

@@ -6,4 +6,5 @@ export const defaultBotProps: BubbleProps = {
   chatflowConfig: undefined,
   theme: undefined,
   peleAIConfig: undefined,
+  observersConfig: undefined,
 };
