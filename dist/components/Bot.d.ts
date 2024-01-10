@@ -25,10 +25,6 @@ export type BotProps = {
     titleAvatarSrc?: string;
     fontSize?: number;
     isFullPage?: boolean;
-    peleAIConfig?: PeleAIConfig;
-    isRTL?: boolean;
-    uploadSuccessMessage?: string;
-    uploadFailureMessage?: string;
     observersConfig?: observersConfigType;
 };
 export declare const Bot: (botProps: BotProps & {
