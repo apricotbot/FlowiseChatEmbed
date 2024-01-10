@@ -70,6 +70,9 @@ export const Upload = (props: UploadProps) => {
     };
     fetch('https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/session', options)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a72bf23 (commit dist files)
       // fetch('http://localhost:5001/session', options)
       .then(async (res) => {
         if (!res.ok) {
@@ -253,6 +256,7 @@ export const Upload = (props: UploadProps) => {
     <Show when={isEnabled()}>
       <div>
         <input type="file" id="file_button" style={{ display: 'none' }} accept="image/*,video/*,.doc,.docx,.pdf" />
+<<<<<<< HEAD
 =======
   onMount(async () => {
     const response = await fetch(`https://upload-files-app.calmpond-81c5bb18.eastus.azurecontainerapps.io/config/${props.customerId}`);
@@ -265,6 +269,8 @@ export const Upload = (props: UploadProps) => {
       <div>
         <input type="file" id="file_button" style={{ display: 'none' }} />
 >>>>>>> af22e4e (get upload files config)
+=======
+>>>>>>> a72bf23 (commit dist files)
         {isUploading() ? getProgressBar() : getUpload()}
       </div>
     </Show>
