@@ -41,6 +41,7 @@ export type BotProps = {
   fontSize?: number;
   isFullPage?: boolean;
   peleAIConfig?: PeleAIConfig;
+  isRTL?: boolean;
 };
 
 const defaultWelcomeMessage = 'Hi there! How can I help?';
@@ -409,6 +410,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     <>
       <div
         ref={botContainer}
+        dir={props.isRTL ? 'rtl' : 'ltr'}
         class={'relative flex w-full h-full text-base overflow-hidden bg-cover bg-center flex-col items-center chatbot-container ' + props.class}
       >
         <div class="flex w-full h-full justify-center">
