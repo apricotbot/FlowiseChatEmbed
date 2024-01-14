@@ -49,7 +49,7 @@ export const Badge = (props: Props) => {
         'text-align': 'center',
         color: props.poweredByTextColor ?? defaultTextColor,
         'background-color': props.badgeBackgroundColor ?? '#ffffff',
-        direction: 'ltr'
+        direction: 'ltr',
       }}
     >
       Powered by 🪄
