@@ -76,7 +76,7 @@ export const TextInput = (props: Props) => {
         placeholder={props.placeholder ?? 'Type your question'}
       />
       <SendButton
-        sendButtonColor={props.sendButtonColor?? defaultButtonColor}
+        sendButtonColor={props.sendButtonColor ?? defaultButtonColor}
         type="button"
         isDisabled={props.disabled || inputValue() === ''}
         class="my-2 ml-2"
@@ -84,7 +84,12 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
-      <Upload uploadColor={props.sendButtonColor?? defaultButtonColor} chatId={props.chatId} customerId={props.peleAIConfig?.customerId} onUpload={props.onUpload} />
+      <Upload
+        uploadColor={props.sendButtonColor ?? defaultButtonColor}
+        chatId={props.chatId}
+        customerId={props.peleAIConfig?.customerId}
+        onUpload={props.onUpload}
+      />
     </div>
   );
 };

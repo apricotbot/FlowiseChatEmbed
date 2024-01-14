@@ -4,10 +4,17 @@
     <script type="module">
         import Chatbot from "./web.js"
         Chatbot.init({
-            chatflowid: '',
-            apiHost: 'https://localhost:3000',
+            chatflowid: "1234",
+            apiHost: "https://aigents-app.calmpond-81c5bb18.eastus.azurecontainerapps.io",
+            theme: {
+                chatWindow: {
+                    textInput: {
+                        sendButtonColor: "#f19593",
+                    }
+                }
+            },
             peleAIConfig: {
-                customerId: ''
+                customerId: '11a51cad-af2b-11ee-bb09-000d3a55b4ce'
             }
         })
     </script>
