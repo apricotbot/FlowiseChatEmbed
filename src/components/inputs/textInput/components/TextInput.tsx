@@ -93,15 +93,21 @@ export const TextInput = (props: Props) => {
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3ac3312 (commit dist)
       <Upload
         uploadColor={props.sendButtonColor ?? defaultButtonColor}
         chatId={props.chatId}
         customerId={props.peleAIConfig?.customerId}
         onUpload={props.onUpload}
       />
+<<<<<<< HEAD
 =======
       <Upload customerId={props.apricotBotConfig?.customerId}/>
 >>>>>>> af22e4e (get upload files config)
+=======
+>>>>>>> 3ac3312 (commit dist)
     </div>
   );
 };
