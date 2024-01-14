@@ -4,6 +4,7 @@ type UploadProps = {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     uploadColor?: string;
 =======
 >>>>>>> a72bf23 (commit dist files)
@@ -12,6 +13,9 @@ type UploadProps = {
 >>>>>>> 3ac3312 (commit dist)
 =======
 >>>>>>> e0cdf25 (commit dist files)
+=======
+    uploadColor?: string;
+>>>>>>> 8de4eef (commit dist)
     onUpload: (isSuccess: boolean, message: string) => void;
 };
 export declare const Upload: (props: UploadProps) => import("solid-js").JSX.Element;
