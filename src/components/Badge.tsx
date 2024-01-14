@@ -1,3 +1,4 @@
+import { lte } from 'lodash';
 import { onCleanup, onMount } from 'solid-js';
 
 type Props = {
@@ -23,14 +24,14 @@ export const Badge = (props: Props) => {
     });
   };
 
-  onMount(() => {
-    if (!document || !props.botContainer) return;
-    observer = new MutationObserver(appendBadgeIfNecessary);
-    observer.observe(props.botContainer, {
-      subtree: false,
-      childList: true,
-    });
-  });
+  // onMount(() => {
+  //   if (!document || !props.botContainer) return;
+  //   observer = new MutationObserver(appendBadgeIfNecessary);
+  //   observer.observe(props.botContainer, {
+  //     subtree: false,
+  //     childList: true,
+  //   });
+  // });
 
   onCleanup(() => {
     if (observer) observer.disconnect();
@@ -48,20 +49,10 @@ export const Badge = (props: Props) => {
         'text-align': 'center',
         color: props.poweredByTextColor ?? defaultTextColor,
         'background-color': props.badgeBackgroundColor ?? '#ffffff',
+        direction: 'ltr'
       }}
     >
-      Powered by
-      <a
-        ref={liteBadge}
-        href={'https://flowiseai.com'}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="lite-badge"
-        id="lite-badge"
-        style={{ 'font-weight': 'bold', color: props.poweredByTextColor ?? defaultTextColor }}
-      >
-        <span> Flowise</span>
-      </a>
+      Powered by 🪄
     </span>
   );
 };
