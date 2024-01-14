@@ -61,4 +61,4 @@ export type PeleAIConfig = {
 export type UploadTheme = {
   successMessage?: string;
   failureMessage?: string;
-}
+};
