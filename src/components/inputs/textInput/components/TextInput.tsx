@@ -21,6 +21,7 @@ type Props = {
 
 const defaultBackgroundColor = '#ffffff';
 const defaultTextColor = '#303235';
+const defaultButtonColor = '#3B81F6';
 
 export const TextInput = (props: Props) => {
   const [inputValue, setInputValue] = createSignal(props.defaultValue ?? '');
@@ -75,7 +76,7 @@ export const TextInput = (props: Props) => {
         placeholder={props.placeholder ?? 'Type your question'}
       />
       <SendButton
-        sendButtonColor={props.sendButtonColor}
+        sendButtonColor={props.sendButtonColor?? defaultButtonColor}
         type="button"
         isDisabled={props.disabled || inputValue() === ''}
         class="my-2 ml-2"
@@ -83,7 +84,7 @@ export const TextInput = (props: Props) => {
       >
         <span style={{ 'font-family': 'Poppins, sans-serif' }}>Send</span>
       </SendButton>
-      <Upload chatId={props.chatId} customerId={props.peleAIConfig?.customerId} onUpload={props.onUpload} />
+      <Upload uploadColor={props.sendButtonColor?? defaultButtonColor} chatId={props.chatId} customerId={props.peleAIConfig?.customerId} onUpload={props.onUpload} />
     </div>
   );
 };

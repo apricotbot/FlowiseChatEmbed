@@ -3,6 +3,7 @@ import { createSignal, onMount, Show } from 'solid-js';
 type UploadProps = {
   chatId?: string;
   customerId?: string;
+  uploadColor?: string;
   onUpload: (isSuccess: boolean, message: string) => void;
 };
 
@@ -132,7 +133,7 @@ export const Upload = (props: UploadProps) => {
           r="46.5"
           cx="56.5"
           cy="56.5"
-          stroke="#76e5b1"
+          stroke={props.uploadColor ?? "#76e5b1"}
           stroke-width="9"
           stroke-linecap="round"
           stroke-dashoffset="219px"
