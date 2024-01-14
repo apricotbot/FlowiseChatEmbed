@@ -4,6 +4,8 @@ type UploadProps = {
   chatId?: string;
   customerId?: string;
   uploadColor?: string;
+  successMessage?: string;
+  failureMessage?: string;
   onUpload: (isSuccess: boolean, message: string) => void;
 };
 
@@ -80,17 +82,17 @@ export const Upload = (props: UploadProps) => {
           });
           updateProgressBar(((i + 1) / fileChunks.length) * 100);
         }
-        return Promise.resolve('File Uploaded Successfully');
+        return Promise.resolve();
       })
       .then(() => {
         setTimeout(() => {
           setIsUploading(false);
-          props.onUpload(true, 'Thank you for sharing this file');
+          props.onUpload(true, props.successMessage ?? 'Thank you for sharing this file');
         }, 500);
       })
       .catch((err) => {
         setIsUploading(false);
-        props.onUpload(false, 'Error occurred while uploading file, please retry..');
+        props.onUpload(false, props.failureMessage ?? 'Error occurred while uploading file, please retry..');
       });
   };
 

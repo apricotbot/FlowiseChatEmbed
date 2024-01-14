@@ -25,6 +25,8 @@ export type BotProps = {
     isFullPage?: boolean;
     peleAIConfig?: PeleAIConfig;
     isRTL?: boolean;
+    uploadSuccessMessage?: string;
+    uploadFailureMessage?: string;
 };
 export declare const Bot: (botProps: BotProps & {
     class?: string;

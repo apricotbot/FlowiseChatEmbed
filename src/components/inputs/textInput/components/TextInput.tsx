@@ -15,6 +15,8 @@ type Props = {
   disabled?: boolean;
   peleAIConfig?: PeleAIConfig;
   chatId?: string;
+  uploadSuccessMessage?: string;
+  uploadFailureMessage?: string;
   onSubmit: (value: string) => void;
   onUpload: (isSuccess: boolean, message: string) => void;
 };
@@ -88,6 +90,8 @@ export const TextInput = (props: Props) => {
         uploadColor={props.sendButtonColor ?? defaultButtonColor}
         chatId={props.chatId}
         customerId={props.peleAIConfig?.customerId}
+        successMessage={props.uploadSuccessMessage}
+        failureMessage={props.uploadFailureMessage}
         onUpload={props.onUpload}
       />
     </div>

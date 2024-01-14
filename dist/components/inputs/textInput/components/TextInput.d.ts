@@ -9,6 +9,8 @@ type Props = {
     disabled?: boolean;
     peleAIConfig?: PeleAIConfig;
     chatId?: string;
+    uploadSuccessMessage?: string;
+    uploadFailureMessage?: string;
     onSubmit: (value: string) => void;
     onUpload: (isSuccess: boolean, message: string) => void;
 };

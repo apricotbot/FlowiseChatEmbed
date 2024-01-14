@@ -68,6 +68,8 @@ export const Bubble = (props: BubbleProps) => {
             apiHost={props.apiHost}
             peleAIConfig={props.peleAIConfig}
             isRTL={bubbleProps.theme?.chatWindow?.isRTL}
+            uploadSuccessMessage={bubbleProps.theme?.upload?.successMessage}
+            uploadFailureMessage={bubbleProps.theme?.upload?.failureMessage}
           />
         </Show>
       </div>

@@ -2,6 +2,8 @@ type UploadProps = {
     chatId?: string;
     customerId?: string;
     uploadColor?: string;
+    successMessage?: string;
+    failureMessage?: string;
     onUpload: (isSuccess: boolean, message: string) => void;
 };
 export declare const Upload: (props: UploadProps) => import("solid-js").JSX.Element;

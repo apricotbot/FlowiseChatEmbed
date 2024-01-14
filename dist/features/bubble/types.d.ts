@@ -4,6 +4,7 @@ export type BubbleParams = {
 export type BubbleTheme = {
     chatWindow?: ChatWindowTheme;
     button?: ButtonTheme;
+    upload?: UploadTheme;
 };
 export type TextInputTheme = {
     backgroundColor?: string;
@@ -48,5 +49,9 @@ export type ButtonTheme = {
 };
 export type PeleAIConfig = {
     customerId?: string;
+};
+export type UploadTheme = {
+    successMessage?: string;
+    failureMessage?: string;
 };
 //# sourceMappingURL=types.d.ts.map

@@ -42,6 +42,8 @@ export type BotProps = {
   isFullPage?: boolean;
   peleAIConfig?: PeleAIConfig;
   isRTL?: boolean;
+  uploadSuccessMessage?: string;
+  uploadFailureMessage?: string;
 };
 
 const defaultWelcomeMessage = 'Hi there! How can I help?';
@@ -515,6 +517,8 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
             sendButtonColor={props.textInput?.sendButtonColor}
             fontSize={props.fontSize}
             peleAIConfig={props.peleAIConfig}
+            uploadSuccessMessage={props.uploadSuccessMessage}
+            uploadFailureMessage={props.uploadFailureMessage}
             chatId={chatId()}
             disabled={loading()}
             defaultValue={userInput()}
