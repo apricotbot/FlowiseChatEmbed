@@ -11,10 +11,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/index.html')); // serve the static html
 });
 
-app.listen(3001, (err) => {
+const PORT = 3002;
+app.listen(PORT, (err) => {
   if (err) {
     console.error(err);
     return;
   }
-  console.log(`Server is listening at: ${3001}`);
+  console.log(`Server is listening at: ${PORT}`);
 });
