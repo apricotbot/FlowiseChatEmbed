@@ -1,14 +1,57 @@
 <html>
 
 <body>
+
     <script type="module">
-        import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+        import Chatbot from "./web.js"
         Chatbot.init({
-            chatflowid: "e683f528-4f5f-4cf8-8f5b-25f7802c7de1",
-            apiHost: "http://localhost:3000",
+            chatflowid: "8f43d942-887a-4019-b9f8-a8760e5cdfd3",
+            apiHost: "https://aigents-app.calmpond-81c5bb18.eastus.azurecontainerapps.io",
+            peleAIConfig: {
+                customerId: '11a51cad-af2b-11ee-bb09-000d3a55b4ce'
+            },
             chatflowConfig: {
-                vars: {
-                    customer_id: 'pele-goodies'
+                // topK: 2
+            },
+            theme: {
+                button: {
+                    backgroundColor: "#3c4b78",
+                    right: 20,
+                    bottom: 20,
+                    size: "large",
+                    iconColor: "white",
+                    customIconSrc: "https://aigentseastus.blob.core.windows.net/companies/Testimonies/logo.jpeg",
+                },
+                chatWindow: {
+                    welcomeMessage: '',
+                    backgroundColor: "#ffffff",
+                    height: 700,
+                    width: 400,
+                    fontSize: 16,
+                    poweredByTextColor: "#303235",
+                    botMessage: {
+                        backgroundColor: "#ffffff",
+                        textColor: "#000000",
+                        showAvatar: true,
+                        avatarSrc: "https://aigentseastus.blob.core.windows.net/companies/Testimonies/logo.jpeg",
+                    },
+                    userMessage: {
+                        backgroundColor: "#ffffff",
+                        textColor: "#000000",
+                        showAvatar: true,
+                        avatarSrc: "https://aigentseastus.blob.core.windows.net/companies/Testimonies/avatar.png",
+                    },
+                    textInput: {
+                        placeholder: "I want to provide a testimony.",
+                        backgroundColor: "#ffffff",
+                        textColor: "#303235",
+                        sendButtonColor: "#3c4b78",
+                    },
+                    isRTL: false
+                },
+                upload: {
+                    successMessage: "The file uploaded successfully",
+                    failureMessage: "Error in receiving the file, please try again"
                 }
             }
         })
