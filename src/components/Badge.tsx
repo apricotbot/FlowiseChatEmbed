@@ -52,7 +52,7 @@ export const Badge = (props: Props) => {
         direction: 'ltr',
       }}
     >
-      Powered By Kesem AI
+      Powered By Pele AI
     </span>
   );
 };
