@@ -111,7 +111,6 @@ export type BotProps = {
   isFullPage?: boolean;
   footer?: FooterTheme;
   observersConfig?: observersConfigType;
-  starterPrompts?: string[];
   starterPromptFontSize?: number;
 };
 
@@ -316,6 +315,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
       audioRef.play();
     }
   };
+  let hasSoundPlayed = false;
 
   let hasSoundPlayed = false;
   // TODO: this has the bug where first message is not showing: https://github.com/FlowiseAI/FlowiseChatEmbed/issues/158
@@ -329,16 +329,49 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     resultText: string,
   ) => {
     setMessages((data) => {
+      let uiUpdated = false;
+      const messageExists = data.some((item) => item.messageId === messageId);
+
       const updated = data.map((item, i) => {
         if (i === data.length - 1) {
           if (resultText && !hasSoundPlayed) {
             playReceiveSound();
             hasSoundPlayed = true;
           }
-          return { ...item, message: item.message + text, sourceDocuments, fileAnnotations, agentReasoning, action };
+          // Check if newText now matches resultText to track UI update
+          if (newText === resultText) {
+            uiUpdated = true;
+          }
+          // Play sound when message starts streaming
+          if (previousText !== newText && !uiUpdated && !hasSoundPlayed) {
+            playReceiveSound();
+            hasSoundPlayed = true;
+          }
+          return { ...item, message: newText, messageId, sourceDocuments, fileAnnotations, agentReasoning };
         }
         return item;
       });
+
+      // Add apiMessage if resultText exists and ui not updated
+      if (resultText && !uiUpdated && !messageExists) {
+        updated.push({
+          message: resultText,
+          type: 'apiMessage',
+          messageId,
+          sourceDocuments,
+          fileAnnotations,
+          agentReasoning,
+        });
+      }
+
+      if (resultText && !hasSoundPlayed) {
+        playReceiveSound();
+      }
+
+      if (resultText) {
+        hasSoundPlayed = false;
+      }
+
       addChatMessage(updated);
       return [...updated];
     });
