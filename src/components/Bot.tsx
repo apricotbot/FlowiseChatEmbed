@@ -608,7 +608,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     }
 
     setStarterPrompts([]);
-  })
+  });
 
   // Auto scroll chat to bottom
   createEffect(() => {
