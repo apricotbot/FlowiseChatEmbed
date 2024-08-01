@@ -141,6 +141,7 @@ export const Bubble = (props: BubbleProps) => {
               chatflowConfig={props.chatflowConfig}
               apiHost={props.apiHost}
               observersConfig={props.observersConfig}
+              starterPrompts={props.starterPrompts}
             />
           </div>
         </Show>

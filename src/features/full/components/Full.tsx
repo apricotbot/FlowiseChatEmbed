@@ -79,7 +79,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             apiHost={props.apiHost}
             isFullPage={true}
             observersConfig={props.observersConfig}
-            starterPromptFontSize={props.theme?.chatWindow?.starterPromptFontSize}
+            starterPrompts={props.starterPrompts}
           />
         </div>
       </Show>
