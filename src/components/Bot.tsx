@@ -606,8 +606,6 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
 
       return setStarterPrompts(prompts.filter((prompt) => prompt !== ''));
     }
-
-    setStarterPrompts([]);
   });
 
   // Auto scroll chat to bottom
