@@ -59,7 +59,7 @@ export type ChatWindowTheme = {
     feedback?: FeedbackTheme;
     footer?: FooterTheme;
     poweredByTextColor?: string;
-    starterPromptFontSize?: number;
+    starterPrompts?: string[];
 };
 export type ButtonTheme = {
     size?: 'small' | 'medium' | 'large' | number;

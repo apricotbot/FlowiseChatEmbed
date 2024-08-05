@@ -66,7 +66,7 @@ export type ChatWindowTheme = {
   feedback?: FeedbackTheme;
   footer?: FooterTheme;
   poweredByTextColor?: string;
-  starterPromptFontSize?: number;
+  starterPrompts?: string[];
 };
 
 export type ButtonTheme = {

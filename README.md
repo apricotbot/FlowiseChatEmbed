@@ -99,7 +99,6 @@ You can also customize chatbot with different configuration
         console.log({ loading });
       },
     },
-    starterPrompts: ['What is a bot?', 'Who are you'], // The chat flow's starter prompts will override the ones passed here
     theme: {
       button: {
         backgroundColor: '#3B81F6',
@@ -168,7 +167,8 @@ You can also customize chatbot with different configuration
           text: 'Powered by',
           company: 'Flowise',
           companyLink: 'https://flowiseai.com',
-        }
+        },
+        starterPrompts: ['What is a bot?', 'Who are you?'], // It overrides the starter prompts set by the chat flow passed
       },
     },
   });
