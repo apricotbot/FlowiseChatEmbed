@@ -329,6 +329,8 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     resultText: string,
   ) => {
     setMessages((data) => {
+      let uiUpdated = false;
+      const messageExists = data.some((item) => item.messageId === messageId);
       const updated = data.map((item, i) => {
         if (i === data.length - 1) {
           if (resultText && !hasSoundPlayed) {
@@ -341,7 +343,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
       });
 
       // Add apiMessage if resultText exists and ui not updated
-      if (resultText && !uiUpdated) {
+      if (resultText && !uiUpdated && !messageExists) {
         updated.push({
           message: resultText,
           type: 'apiMessage',
