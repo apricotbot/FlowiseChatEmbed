@@ -318,19 +318,8 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
   };
 
   let hasSoundPlayed = false;
-  // TODO: this has the bug where first message is not showing: https://github.com/FlowiseAI/FlowiseChatEmbed/issues/158
-  // The solution is to use SSE
-  const updateLastMessage = (
-    text: string,
-    sourceDocuments: any,
-    fileAnnotations: any,
-    agentReasoning: IAgentReasoning[] = [],
-    action: IAction,
-    resultText: string,
-  ) => {
+  const updateLastMessage = (text: string, messageId: string, sourceDocuments: any, fileAnnotations: any, agentReasoning: IAgentReasoning[] = [], action: IAction, resultText: string) => {
     setMessages((data) => {
-      let uiUpdated = false;
-      const messageExists = data.some((item) => item.messageId === messageId);
       const updated = data.map((item, i) => {
         if (i === data.length - 1) {
           if (resultText && !hasSoundPlayed) {
@@ -341,28 +330,10 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         }
         return item;
       });
-
-      // Add apiMessage if resultText exists and ui not updated
-      if (resultText && !uiUpdated && !messageExists) {
-        updated.push({
-          message: resultText,
-          type: 'apiMessage',
-          messageId,
-          sourceDocuments,
-          fileAnnotations,
-          agentReasoning,
-          action,
-        });
-      }
-
-      if (resultText && !messageExists) {
-        playReceiveSound();
-      }
-
       addChatMessage(updated);
       return [...updated];
     });
-
+  
     // Set hasSoundPlayed to false if resultText exists
     if (resultText) {
       hasSoundPlayed = false;
