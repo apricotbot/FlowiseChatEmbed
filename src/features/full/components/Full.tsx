@@ -54,6 +54,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             width: props.theme?.chatWindow?.width ? `${props.theme?.chatWindow?.width.toString()}px` : '100%',
             margin: '0px',
             overflow: 'hidden', // Ensure no extra scrolling due to content overflow
+            direction: props.theme?.chatWindow?.direction === 'rtl' ? 'rtl' : 'ltr',
           }}
         >
           <Bot

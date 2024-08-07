@@ -60,6 +60,7 @@ export type ChatWindowTheme = {
     footer?: FooterTheme;
     poweredByTextColor?: string;
     starterPrompts?: string[];
+    direction?: string;
 };
 export type ButtonTheme = {
     size?: 'small' | 'medium' | 'large' | number;

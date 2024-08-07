@@ -135,6 +135,7 @@ You can also customize chatbot with different configuration
         fontSize: 16,
         starterPrompts: ['What is a bot?', 'Who are you?'], // It overrides the starter prompts set by the chat flow passed
         starterPromptFontSize: 15,
+        direction: 'rtl', //Change the direction view to RTL
         botMessage: {
           backgroundColor: '#f7f8ff',
           textColor: '#303235',
