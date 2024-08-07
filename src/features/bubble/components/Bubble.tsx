@@ -95,6 +95,7 @@ export const Bubble = (props: BubbleProps) => {
           'z-index': 42424242,
           bottom: `${Math.min(buttonPosition().bottom + buttonSize + 10, window.innerHeight - chatWindowBottom)}px`,
           right: `${Math.min(buttonPosition().right, window.innerWidth - 410)}px`,
+          direction: props.theme?.chatWindow?.direction === 'rtl' ? 'rtl' : 'ltr',
         }}
         class={
           `fixed sm:right-5 rounded-lg w-full sm:w-[400px] max-h-[704px]` +
