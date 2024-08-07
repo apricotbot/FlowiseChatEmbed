@@ -6,13 +6,13 @@ declare const chatbot: {
         observersConfig?: import("./components/Bot").observersConfigType | undefined;
     } & {
         id?: string | undefined;
-    }) => void;
+    }, style?: HTMLStyleElement | undefined) => void;
     init: (props: {
         chatflowid: string;
         apiHost?: string | undefined;
         chatflowConfig?: Record<string, unknown> | undefined;
         observersConfig?: import("./components/Bot").observersConfigType | undefined;
-    }) => void;
+    }, style?: HTMLStyleElement | undefined) => void;
     destroy: () => void;
 };
 export default chatbot;

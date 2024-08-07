@@ -10,19 +10,21 @@ type BotProps = {
 
 let elementUsed: Element | undefined;
 
-export const initFull = (props: BotProps & { id?: string }) => {
+export const initFull = (props: BotProps & { id?: string }, style?: HTMLStyleElement) => {
   destroy();
   const fullElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-fullchatbot');
   if (!fullElement) throw new Error('<flowise-fullchatbot> element not found.');
   Object.assign(fullElement, props);
+  if (style) fullElement.shadowRoot?.appendChild(style);
   elementUsed = fullElement;
 };
 
-export const init = (props: BotProps) => {
+export const init = (props: BotProps, style?: HTMLStyleElement) => {
   destroy();
   const element = document.createElement('flowise-chatbot');
   Object.assign(element, props);
   document.body.appendChild(element);
+  if (style) element.shadowRoot?.appendChild(style);
   elementUsed = element;
 };
 
