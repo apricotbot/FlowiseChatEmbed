@@ -115,7 +115,7 @@ export const TextInput = (props: Props) => {
           {warningMessage()}
         </div>
       </Show>
-      <div class="w-full flex items-end justify-between">
+      <div class="w-full flex items-end justify-between input">
         {props.uploadsConfig?.isImageUploadAllowed ? (
           <>
             <ImageUploadButton
