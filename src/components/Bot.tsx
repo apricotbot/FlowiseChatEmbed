@@ -313,6 +313,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
         audioSrc = props.textInput?.receiveSoundLocation;
       }
       audioRef = new Audio(audioSrc);
+      audioRef.volume = 0.1;
       audioRef.play();
     }
   };
