@@ -91,6 +91,7 @@ export const TextInput = (props: Props) => {
       } else {
         audioRef = new Audio(defaultSendSound);
       }
+      audioRef.volume = 0.1;
     }
   });
 
