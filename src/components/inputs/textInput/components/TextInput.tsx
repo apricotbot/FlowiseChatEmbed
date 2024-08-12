@@ -59,6 +59,7 @@ export const TextInput = (props: Props) => {
     if (checkIfInputIsValid()) {
       props.onSubmit(inputValue());
       if (props.sendMessageSound && audioRef) {
+        audioRef.volume = 0.1;
         audioRef.play();
       }
       setInputValue('');
@@ -91,7 +92,6 @@ export const TextInput = (props: Props) => {
       } else {
         audioRef = new Audio(defaultSendSound);
       }
-      audioRef.volume = 0.1;
     }
   });
 
