@@ -1,3 +1,4 @@
+import { enableExternalSource } from 'solid-js';
 import { observersConfigType } from './components/Bot';
 
 /* eslint-disable solid/reactivity */
@@ -17,6 +18,7 @@ export const initFull = (props: BotProps & { id?: string }, style?: HTMLStyleEle
   Object.assign(fullElement, props);
   if (style) fullElement.shadowRoot?.appendChild(style);
   elementUsed = fullElement;
+  return fullElement;
 };
 
 export const init = (props: BotProps, style?: HTMLStyleElement) => {
@@ -26,6 +28,7 @@ export const init = (props: BotProps, style?: HTMLStyleElement) => {
   document.body.appendChild(element);
   if (style) element.shadowRoot?.appendChild(style);
   elementUsed = element;
+  return element;
 };
 
 export const destroy = () => {
