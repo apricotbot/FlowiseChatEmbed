@@ -213,7 +213,17 @@ export const BotBubble = (props: Props) => {
     }
 
     if (botMessageEl) {
-      botMessageEl.innerHTML = Marked.parse(props.message.message);
+
+      const { message } = props.message;
+      const lines = message.trim().split('\n');
+      const lastLine = lines.pop() || '';
+
+      const contentToParse = lastLine.startsWith('<') && !lastLine.endsWith('>')
+        ? lines.join('\n')
+        : message;
+
+      botMessageEl.innerHTML = Marked.parse(contentToParse);
+
       botMessageEl.querySelectorAll('a').forEach((link) => {
         link.target = '_blank';
       });
