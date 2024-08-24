@@ -24,7 +24,6 @@ type Props = {
   autoFocus?: boolean;
   sendMessageSound?: boolean;
   sendSoundLocation?: string;
-  sendButtonDirection? :string;
 };
 
 const defaultBackgroundColor = '#ffffff';
@@ -153,7 +152,6 @@ export const TextInput = (props: Props) => {
         ) : null}
         <SendButton
           sendButtonColor={props.sendButtonColor}
-          sendButtonDirection={props.sendButtonDirection}
           type="button"
           isDisabled={props.disabled || isSendButtonDisabled()}
           class="m-0 h-14 flex items-center justify-center"
