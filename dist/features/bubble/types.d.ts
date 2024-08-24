@@ -25,6 +25,7 @@ export type UserMessageTheme = {
     textColor?: string;
     showAvatar?: boolean;
     avatarSrc?: string;
+    message?: string;
 };
 export type BotMessageTheme = {
     backgroundColor?: string;

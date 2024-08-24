@@ -666,6 +666,10 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
 
     socket.on('connect', () => {
       setSocketIOClientId(socket.id);
+
+      if (props.userMessage?.message) {
+        handleSubmit(props.userMessage?.message);
+      }
     });
 
     socket.on('start', () => {
