@@ -20,6 +20,7 @@ export type TextInputTheme = {
   sendSoundLocation?: string;
   receiveMessageSound?: boolean;
   receiveSoundLocation?: string;
+  sendButtonDirection?: string;
 };
 
 export type UserMessageTheme = {

@@ -4,6 +4,7 @@ type SendButtonProps = {
     isDisabled?: boolean;
     isLoading?: boolean;
     disableIcon?: boolean;
+    sendButtonDirection?: string;
 } & JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 export declare const SendButton: (props: SendButtonProps) => JSX.Element;
 export declare const DeleteButton: (props: SendButtonProps) => JSX.Element;

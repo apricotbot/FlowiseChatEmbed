@@ -1215,6 +1215,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
                 handleFileChange={handleFileChange}
                 sendMessageSound={props.textInput?.sendMessageSound}
                 sendSoundLocation={props.textInput?.sendSoundLocation}
+                sendButtonDirection={props.textInput?.sendButtonDirection}
               />
             )}
           </div>

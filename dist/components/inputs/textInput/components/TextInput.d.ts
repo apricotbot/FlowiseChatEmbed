@@ -18,6 +18,7 @@ type Props = {
     autoFocus?: boolean;
     sendMessageSound?: boolean;
     sendSoundLocation?: string;
+    sendButtonDirection?: string;
 };
 export declare const TextInput: (props: Props) => import("solid-js").JSX.Element;
 export {};
