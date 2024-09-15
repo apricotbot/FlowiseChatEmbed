@@ -1019,7 +1019,12 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
               <span style={{ 'font-family': 'Poppins, sans-serif' }}>Clear</span>
             </DeleteButton>
             <Show when={props.showResizeButton}>
-              <ResizeButton type='button' mode={props.isFullPage ? 'minimize' : 'expand'} color={props.textInput?.sendButtonColor} on:click={resize} />
+              <ResizeButton
+                type="button"
+                mode={props.isFullPage ? 'minimize' : 'expand'}
+                color={props.textInput?.sendButtonColor}
+                on:click={resize}
+              />
             </Show>
           </div>
         ) : null}
