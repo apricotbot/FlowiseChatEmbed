@@ -81,6 +81,8 @@ export type BotProps = {
     observersConfig?: observersConfigType;
     starterPrompts?: string[];
     starterPromptFontSize?: number;
+    showResizeButton?: boolean;
+    onResize?: (isFull: boolean) => void;
 };
 export type LeadsConfig = {
     status: boolean;

@@ -95,7 +95,7 @@ export const Bubble = (props: BubbleProps) => {
           'z-index': 42424242,
           bottom: `${Math.min(buttonPosition().bottom + buttonSize + 10, window.innerHeight - chatWindowBottom)}px`,
           right: `${Math.min(buttonPosition().right, window.innerWidth - 410)}px`,
-          direction: props.theme?.chatWindow?.direction === 'rtl' ? 'rtl' : 'ltr',
+          direction: props.theme?.chatWindow?.textInput?.direction
         }}
         class={
           `fixed sm:right-5 rounded-lg w-full sm:w-[400px] max-h-[704px]` +
@@ -142,6 +142,8 @@ export const Bubble = (props: BubbleProps) => {
               chatflowConfig={props.chatflowConfig}
               apiHost={props.apiHost}
               observersConfig={props.observersConfig}
+              showResizeButton={bubbleProps.theme?.chatWindow?.showResizeButton}
+              onResize={bubbleProps.theme?.chatWindow?.onResize}
             />
           </div>
         </Show>

@@ -20,6 +20,7 @@ export type TextInputTheme = {
   sendSoundLocation?: string;
   receiveMessageSound?: boolean;
   receiveSoundLocation?: string;
+  direction?: 'ltr' | 'rtl';
 };
 
 export type UserMessageTheme = {
@@ -68,7 +69,8 @@ export type ChatWindowTheme = {
   footer?: FooterTheme;
   poweredByTextColor?: string;
   starterPrompts?: string[];
-  direction?: string;
+  showResizeButton?: boolean;
+  onResize?: (isFull: boolean) => void;
 };
 
 export type ButtonTheme = {

@@ -18,6 +18,7 @@ import { CancelButton } from './buttons/CancelButton';
 import { cancelAudioRecording, startAudioRecording, stopAudioRecording } from '@/utils/audioRecording';
 import { LeadCaptureBubble } from '@/components/bubbles/LeadCaptureBubble';
 import { removeLocalStorageChatHistory, getLocalStorageChatflow, setLocalStorageChatflow } from '@/utils';
+import { ResizeButton } from './buttons/ResizeButton';
 
 export type FileEvent<T = EventTarget> = {
   target: T;
@@ -113,6 +114,8 @@ export type BotProps = {
   observersConfig?: observersConfigType;
   starterPrompts?: string[];
   starterPromptFontSize?: number;
+  showResizeButton?: boolean;
+  onResize?: (isFull: boolean) => void;
 };
 
 export type LeadsConfig = {
@@ -568,6 +571,12 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     }
   };
 
+  const resize = () => {
+    if (props.onResize) {
+      props.onResize(props.isFullPage || false);
+    }
+  }
+  
   createEffect(() => {
     if (props.starterPrompts && props.starterPrompts.length > 0) {
       const prompts = Object.values(props.starterPrompts).map((prompt) => prompt);
@@ -1009,6 +1018,9 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
             >
               <span style={{ 'font-family': 'Poppins, sans-serif' }}>Clear</span>
             </DeleteButton>
+            <Show when={props.showResizeButton}>
+              <ResizeButton type='button' mode={props.isFullPage ? 'minimize' : 'expand'} color={props.textInput?.sendButtonColor} on:click={resize} />
+            </Show>
           </div>
         ) : null}
         <div class="flex flex-col w-full h-full justify-start z-0">
@@ -1219,6 +1231,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
                 handleFileChange={handleFileChange}
                 sendMessageSound={props.textInput?.sendMessageSound}
                 sendSoundLocation={props.textInput?.sendSoundLocation}
+                direction={props.textInput?.direction}
               />
             )}
           </div>

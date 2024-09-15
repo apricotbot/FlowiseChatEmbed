@@ -13,8 +13,11 @@ let elementUsed: Element | undefined;
 
 export const initFull = (props: BotProps & { id?: string }, style?: HTMLStyleElement) => {
   destroy();
-  const fullElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-fullchatbot');
-  if (!fullElement) throw new Error('<flowise-fullchatbot> element not found.');
+  let fullElement = props.id ? document.getElementById(props.id) : document.querySelector('flowise-fullchatbot');
+  if (!fullElement) {
+    fullElement = document.createElement('flowise-fullchatbot');
+    document.body.append(fullElement);
+  }
   Object.assign(fullElement, props);
   if (style) fullElement.shadowRoot?.appendChild(style);
   elementUsed = fullElement;

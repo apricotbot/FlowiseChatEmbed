@@ -54,7 +54,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             width: props.theme?.chatWindow?.width ? `${props.theme?.chatWindow?.width.toString()}px` : '100%',
             margin: '0px',
             overflow: 'hidden', // Ensure no extra scrolling due to content overflow
-            direction: props.theme?.chatWindow?.direction === 'rtl' ? 'rtl' : 'ltr',
+            direction: props.theme?.chatWindow?.textInput?.direction
           }}
         >
           <Bot
@@ -80,6 +80,8 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             apiHost={props.apiHost}
             isFullPage={true}
             observersConfig={props.observersConfig}
+            showResizeButton={props.theme?.chatWindow?.showResizeButton}
+            onResize={props.theme?.chatWindow?.onResize}
           />
         </div>
       </Show>
