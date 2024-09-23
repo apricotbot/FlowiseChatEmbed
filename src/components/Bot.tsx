@@ -677,6 +677,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
       setSocketIOClientId(socket.id);
 
       if (props.userMessage?.message) {
+        clearChat();
         handleSubmit(props.userMessage?.message);
       }
     });
