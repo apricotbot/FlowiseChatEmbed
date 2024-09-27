@@ -43,6 +43,15 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
     }
   });
 
+  const closeBot = () => {
+    setIsBotDisplayed(false);
+    const fullElement = document.querySelector('flowise-fullchatbot');
+    if (fullElement) {
+      fullElement.removeAttribute('style');
+      fullElement.className = "";
+    }
+  }
+
   return (
     <>
       <style>{styles}</style>
@@ -83,7 +92,7 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             showResizeButton={props.theme?.chatWindow?.showResizeButton}
             onResize={props.theme?.chatWindow?.onResize}
             showCloseButton={props.theme?.chatWindow?.showCloseButton}
-            onCloseBot={() => setIsBotDisplayed(false)}
+            onCloseBot={closeBot}
           />
         </div>
       </Show>
