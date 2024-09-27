@@ -11,3 +11,4 @@ export * from './XIcon';
 export * from './TickIcon';
 export * from './ExpandIcon';
 export * from './MinimizeIcon';
+export * from './CloseIcon';

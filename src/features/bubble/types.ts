@@ -71,6 +71,7 @@ export type ChatWindowTheme = {
   starterPrompts?: string[];
   showResizeButton?: boolean;
   onResize?: (isFull: boolean) => void;
+  showCloseButton?: boolean;
 };
 
 export type ButtonTheme = {

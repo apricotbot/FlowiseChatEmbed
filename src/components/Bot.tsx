@@ -19,6 +19,7 @@ import { cancelAudioRecording, startAudioRecording, stopAudioRecording } from '@
 import { LeadCaptureBubble } from '@/components/bubbles/LeadCaptureBubble';
 import { removeLocalStorageChatHistory, getLocalStorageChatflow, setLocalStorageChatflow } from '@/utils';
 import { ResizeButton } from './buttons/ResizeButton';
+import { CloseButton } from './buttons/CloseButton';
 
 export type FileEvent<T = EventTarget> = {
   target: T;
@@ -116,6 +117,8 @@ export type BotProps = {
   starterPromptFontSize?: number;
   showResizeButton?: boolean;
   onResize?: (isFull: boolean) => void;
+  showCloseButton?: boolean;
+  onCloseBot?: () => void;
 };
 
 export type LeadsConfig = {
@@ -1025,6 +1028,13 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
                 mode={props.isFullPage ? 'minimize' : 'expand'}
                 color={props.textInput?.sendButtonColor}
                 on:click={resize}
+              />
+            </Show>
+            <Show when={props.showCloseButton}>
+              <CloseButton
+                type="button"
+                color={props.bubbleTextColor}
+                on:click={props.onCloseBot}
               />
             </Show>
           </div>

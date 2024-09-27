@@ -82,6 +82,8 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
             observersConfig={props.observersConfig}
             showResizeButton={props.theme?.chatWindow?.showResizeButton}
             onResize={props.theme?.chatWindow?.onResize}
+            showCloseButton={props.theme?.chatWindow?.showCloseButton}
+            onCloseBot={() => setIsBotDisplayed(false)}
           />
         </div>
       </Show>

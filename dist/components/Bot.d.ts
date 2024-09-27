@@ -83,6 +83,8 @@ export type BotProps = {
     starterPromptFontSize?: number;
     showResizeButton?: boolean;
     onResize?: (isFull: boolean) => void;
+    showCloseButton?: boolean;
+    onCloseBot?: () => void;
 };
 export type LeadsConfig = {
     status: boolean;
