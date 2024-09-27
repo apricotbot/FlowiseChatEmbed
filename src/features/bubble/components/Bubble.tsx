@@ -1,4 +1,4 @@
-import { createSignal, Show, splitProps, onCleanup, createEffect } from 'solid-js';
+import { createSignal, Show, splitProps, onCleanup, createEffect, onMount, createMemo } from 'solid-js';
 import styles from '../../../assets/index.css';
 import { BubbleButton } from './BubbleButton';
 import { BubbleParams } from '../types';
@@ -41,6 +41,16 @@ export const Bubble = (props: BubbleProps) => {
   const buttonSize = getBubbleButtonSize(props.theme?.button?.size); // Default to 48px if size is not provided
   const buttonBottom = props.theme?.button?.bottom ?? 20;
   const chatWindowBottom = buttonBottom + buttonSize + 10; // Adjust the offset here for slight shift
+
+  onMount(() => {
+    if (props?.observersConfig) {
+      const { observeBotOpen } = props.observersConfig;
+      typeof observeBotOpen === 'function' &&
+        createMemo(() => {
+          observeBotOpen(isBotOpened());
+        });
+    }
+  });
 
   // Add viewport meta tag dynamically
   createEffect(() => {
