@@ -578,8 +578,8 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     if (props.onResize) {
       props.onResize(props.isFullPage || false);
     }
-  }
-  
+  };
+
   createEffect(() => {
     if (props.starterPrompts && props.starterPrompts.length > 0) {
       const prompts = Object.values(props.starterPrompts).map((prompt) => prompt);
@@ -1031,11 +1031,7 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
               />
             </Show>
             <Show when={props.showCloseButton}>
-              <CloseButton
-                type="button"
-                color={props.bubbleTextColor}
-                on:click={props.onCloseBot}
-              />
+              <CloseButton type="button" color={props.bubbleTextColor} on:click={props.onCloseBot} />
             </Show>
           </div>
         ) : null}

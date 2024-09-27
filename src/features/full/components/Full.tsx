@@ -48,9 +48,9 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
     const fullElement = document.querySelector('flowise-fullchatbot');
     if (fullElement) {
       fullElement.removeAttribute('style');
-      fullElement.className = "";
+      fullElement.className = '';
     }
-  }
+  };
 
   return (
     <>
