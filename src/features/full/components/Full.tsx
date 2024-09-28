@@ -1,7 +1,7 @@
 import styles from '../../../assets/index.css';
 import { Bot, BotProps } from '@/components/Bot';
 import { BubbleParams } from '@/features/bubble/types';
-import { createSignal, onCleanup, onMount, Show } from 'solid-js';
+import { createSignal, onCleanup, onMount, Show, createMemo } from 'solid-js';
 
 const defaultButtonColor = '#3B81F6';
 const defaultIconColor = 'white';
@@ -29,6 +29,13 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
 
   onMount(() => {
     botLauncherObserver.observe(element);
+    if (props?.observersConfig) {
+      const { observeBotOpen } = props.observersConfig;
+      typeof observeBotOpen === 'function' &&
+        createMemo(() => {
+          observeBotOpen(isBotDisplayed());
+        });
+    }
   });
 
   onCleanup(() => {
@@ -45,11 +52,6 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
 
   const closeBot = () => {
     setIsBotDisplayed(false);
-    const fullElement = document.querySelector('flowise-fullchatbot');
-    if (fullElement) {
-      fullElement.removeAttribute('style');
-      fullElement.className = '';
-    }
   };
 
   return (
