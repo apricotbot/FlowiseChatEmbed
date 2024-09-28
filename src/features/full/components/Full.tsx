@@ -21,10 +21,6 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
     if (viewportMeta) {
       viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, interactive-widget=resizes-content');
     }
-
-    console.log({...props});
-    console.log(props.observersConfig);
-
     if (props?.observersConfig) {
       const { observeBotOpen } = props.observersConfig;
       typeof observeBotOpen === 'function' &&
