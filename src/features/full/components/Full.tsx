@@ -21,6 +21,13 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
     if (viewportMeta) {
       viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, interactive-widget=resizes-content');
     }
+    if (props?.observersConfig) {
+      const { observeBotOpen } = props.observersConfig;
+      typeof observeBotOpen === 'function' &&
+        createMemo(() => {
+          observeBotOpen(isBotDisplayed());
+        });
+    }
   };
 
   const botLauncherObserver = new IntersectionObserver((intersections) => {
@@ -29,13 +36,6 @@ export const Full = (props: FullProps, { element }: { element: HTMLElement }) =>
 
   onMount(() => {
     botLauncherObserver.observe(element);
-    if (props?.observersConfig) {
-      const { observeBotOpen } = props.observersConfig;
-      typeof observeBotOpen === 'function' &&
-        createMemo(() => {
-          observeBotOpen(isBotDisplayed());
-        });
-    }
   });
 
   onCleanup(() => {
