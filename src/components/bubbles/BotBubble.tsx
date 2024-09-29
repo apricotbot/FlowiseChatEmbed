@@ -6,9 +6,9 @@ import { CopyToClipboardButton, ThumbsDownButton, ThumbsUpButton } from '../butt
 import FeedbackContentDialog from '../FeedbackContentDialog';
 import { AgentReasoningBubble } from './AgentReasoningBubble';
 import { TickIcon, XIcon } from '../icons';
-import markdownit from 'markdown-it'
+import markdownit from 'markdown-it';
 
-const md = markdownit({ html: true })
+const md = markdownit({ html: true });
 
 type Props = {
   message: MessageType;
