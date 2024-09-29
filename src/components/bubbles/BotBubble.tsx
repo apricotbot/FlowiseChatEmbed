@@ -1,12 +1,14 @@
 import { createEffect, Show, createSignal, onMount, For } from 'solid-js';
 import { Avatar } from '../avatars/Avatar';
-import { Marked } from '@ts-stack/markdown';
 import { FeedbackRatingType, sendFeedbackQuery, sendFileDownloadQuery, updateFeedbackQuery } from '@/queries/sendMessageQuery';
 import { IAction, MessageType } from '../Bot';
 import { CopyToClipboardButton, ThumbsDownButton, ThumbsUpButton } from '../buttons/FeedbackButtons';
 import FeedbackContentDialog from '../FeedbackContentDialog';
 import { AgentReasoningBubble } from './AgentReasoningBubble';
 import { TickIcon, XIcon } from '../icons';
+import markdownit from 'markdown-it'
+
+const md = markdownit({ html: true })
 
 type Props = {
   message: MessageType;
@@ -30,8 +32,6 @@ const defaultBackgroundColor = '#f7f8ff';
 const defaultTextColor = '#303235';
 const defaultFontSize = 16;
 const defaultFeedbackColor = '#3B81F6';
-
-Marked.setOptions({ isNoP: true });
 
 export const BotBubble = (props: Props) => {
   let botMessageEl: HTMLDivElement | undefined;
@@ -214,16 +214,7 @@ export const BotBubble = (props: Props) => {
 
     if (botMessageEl) {
 
-      const { message } = props.message;
-      const lines = message.trim().split('\n');
-      const lastLine = lines.pop() || '';
-
-      const contentToParse = lastLine.startsWith('<') && !lastLine.endsWith('>')
-        ? lines.join('\n')
-        : message;
-
-      botMessageEl.innerHTML = Marked.parse(contentToParse);
-
+      botMessageEl.innerHTML = md.render(props.message.message);
       botMessageEl.querySelectorAll('a').forEach((link) => {
         link.target = '_blank';
       });
@@ -244,7 +235,6 @@ export const BotBubble = (props: Props) => {
         }
       }
     }
-
     if (botDetailsEl && props.isLoading) {
       botDetailsEl.open = true;
     }
