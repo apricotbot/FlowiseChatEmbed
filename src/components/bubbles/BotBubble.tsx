@@ -213,7 +213,6 @@ export const BotBubble = (props: Props) => {
     }
 
     if (botMessageEl) {
-
       botMessageEl.innerHTML = md.render(props.message.message);
       botMessageEl.querySelectorAll('a').forEach((link) => {
         link.target = '_blank';
